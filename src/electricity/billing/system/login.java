@@ -4,9 +4,13 @@ package electricity.billing.system;
 import java.awt.Color;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
-public class login extends JFrame{
+public class login extends JFrame implements ActionListener{
 
+    JButton cancel;
+    JButton signup;
+    JButton login;
 
     login (){
         super ("Login page");
@@ -49,18 +53,21 @@ public class login extends JFrame{
         // for adding image
         ImageIcon i1= new ImageIcon(ClassLoader.getSystemResource("icon/login.png"));
         Image i2 = i1.getImage().getScaledInstance(16,16,Image.SCALE_DEFAULT);
-        
-        JButton login= new JButton("Login",new ImageIcon(i2));
+        login= new JButton("Login",new ImageIcon(i2));
         login.setBounds(330, 160,100 ,20 );
+        login.addActionListener(this);
         add(login);
         
         // jbutton is used for selecting one /Enter
-        JButton cancel = new JButton("Cancel");
+        cancel = new JButton("Cancel");
         cancel.setBounds(450,160,100,20);
+        cancel.addActionListener(this);
         add(cancel);
         
-        JButton signup = new JButton("Signup");
+        
+        signup = new JButton("Signup");
         signup.setBounds(380,200,100,20);
+        signup.addActionListener(this);
         add(signup);
         
         
@@ -78,6 +85,18 @@ public class login extends JFrame{
         setLocation(400,200);
         setVisible(true);
         
+    }
+    public void actionPerformed(ActionEvent ae){
+        
+        if ( ae.getSource()== login){
+            
+        }else if(ae.getSource() == cancel){
+            setVisible(false);
+        }else if ( ae.getSource() == signup){
+            setVisible(false);
+            new Signup();
+
+        }
     }
 
 
