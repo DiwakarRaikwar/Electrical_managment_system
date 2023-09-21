@@ -11,9 +11,9 @@ import java.awt.event.*;
 
 
 public class Signup extends JFrame implements ActionListener{
-    
+    JTextField meter,username,name,password;
     JButton back, create;
-    
+    JComboBox accountType;
     
     Signup(){
         setSize(700,400);
@@ -41,7 +41,7 @@ public class Signup extends JFrame implements ActionListener{
         panel.add(heading);
         
         
-        JComboBox accountType = new JComboBox();
+        accountType = new JComboBox();
         accountType.addItem("Admin");
         accountType.addItem("Customer");
         accountType.setBounds(260,50,150,20);
@@ -56,7 +56,7 @@ public class Signup extends JFrame implements ActionListener{
         panel.add(lblmeter);
         
         // textfield for metre
-         JTextField meter = new JTextField();
+         meter = new JTextField();
         meter.setBounds(260,90,150,20);
         panel.add(meter);
         
@@ -69,7 +69,7 @@ public class Signup extends JFrame implements ActionListener{
         panel.add(lblusername);
         
         // textfield for username
-         JTextField username = new JTextField();
+        username = new JTextField();
         username.setBounds(260,130,150,20);
         panel.add(username);
         
@@ -82,7 +82,7 @@ public class Signup extends JFrame implements ActionListener{
         panel.add(lblname);
         
         // textfield for username
-         JTextField name = new JTextField();
+        name = new JTextField();
         name.setBounds(260,170,150,20);
         panel.add(name);
         
@@ -96,7 +96,7 @@ public class Signup extends JFrame implements ActionListener{
         panel.add(lblpassword);
         
         // textfield for password
-         JTextField password = new JTextField();
+        password = new JTextField();
         password.setBounds(260,210,150,20);
         panel.add(password);
         
@@ -135,6 +135,23 @@ public class Signup extends JFrame implements ActionListener{
             new login();
             
         }else if ( ae.getSource() == create){
+            String atype = (String) accountType.getSelectedItem();
+            String susername = username.getText();
+            String sname = name.getText();
+            String spassword = password.getText();
+            String smeter = meter.getText();
+            
+            try{
+                Conn c = new Conn();
+                String query = "insert into login values('"+smeter+"', '"+susername+"','"+sname+"','"+spassword+"','"+atype+"')";
+                c.s.executeUpdate(query);
+                JOptionPane.showMessageDialog(null, "Account created successfully");
+                setVisible(false);
+                new login();
+                
+            }catch(Exception e){
+                e.printStackTrace();
+            }
             
         }
     }

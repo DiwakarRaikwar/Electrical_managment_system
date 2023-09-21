@@ -81,12 +81,13 @@ public class login extends JFrame implements ActionListener{
        
         
         
-        setSize (640, 300);
+        setSize (640, 300);// This setsize is basically used for seting up size of whole page in which our interface's is going to be seted
+       
         setLocation(400,200);
         setVisible(true);
         
     }
-    public void actionPerformed(ActionEvent ae){
+    public void actionPerformed(ActionEvent ae){// actin performed to link one class to another
         
         if ( ae.getSource()== login){
             
