@@ -1,16 +1,20 @@
-
+  
 package electricity.billing.system;
 
 import java.awt.Color;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.*;
 
 public class login extends JFrame implements ActionListener{
 
     JButton cancel;
     JButton signup;
     JButton login;
+    
+    JTextField username, password;
+    JComboBox logginin ;
 
     login (){
         super ("Login page");
@@ -24,7 +28,7 @@ public class login extends JFrame implements ActionListener{
         // passwords the width increases by 20 , so they wont overlap
         // basically set bounds used for setting the place where string wants us to be
         
-        JTextField username= new JTextField();
+        username= new JTextField();
         username.setBounds(400,20,150,20);
         add(username);
         
@@ -34,7 +38,7 @@ public class login extends JFrame implements ActionListener{
         add(lblpassword);
         
         // jtextfield is for the area where we write our input
-        JTextField password = new JTextField();
+        password = new JTextField();
         password.setBounds(400,60,150,20);
         add(password);
         
@@ -44,7 +48,7 @@ public class login extends JFrame implements ActionListener{
         add(logininas);
         
         //jcombobox is used to dropdown , like we can select one option from the provided connditions
-        JComboBox logginin = new JComboBox();
+        logginin = new JComboBox();
         logginin.addItem("Admin");
         logginin.addItem("Customer");
         logginin.setBounds(400,100,150,20);
@@ -90,6 +94,30 @@ public class login extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent ae){// actin performed to link one class to another
         
         if ( ae.getSource()== login){
+            String susername = username.getText();
+            String spassword = password.getText();
+            String user = (String)logginin.getSelectedItem();
+            
+            try{
+                Conn c = new Conn();
+                String query = "Select * from login where username= '"+susername+"' and password= '"+spassword+"' and user= '"+user+"'";
+                // when we are trying to execute data then using execute because we are gettin result
+//                c.s.executeQuery(query);
+                
+                ResultSet rs = c.s.executeQuery(query);
+                if ( rs.next()){// if user and password get matcch / then show us the page
+                    setVisible(false);
+                    new Project();
+                }else{
+                    JOptionPane.showMessageDialog(null,"Invalid Login");
+                    username.setText("");
+                    password.setText("");
+                    
+                }
+            
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             
         }else if(ae.getSource() == cancel){
             setVisible(false);

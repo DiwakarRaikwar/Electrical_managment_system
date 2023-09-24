@@ -7,7 +7,7 @@ public class Conn {
     Connection c;
     Statement s;
     
-    Conn(){
+    Conn(){// JDBC - 1st step -> Register the first class
         // To establish a connectin with jdbc , it used sql collector and jdbc. driver.class
      try {
           c =  DriverManager.getConnection("jdbc:mysql://localhost:3306/ebs","root","Indore@123");

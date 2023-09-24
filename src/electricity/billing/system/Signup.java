@@ -142,7 +142,8 @@ public class Signup extends JFrame implements ActionListener{
             String smeter = meter.getText();
             
             try{
-                Conn c = new Conn();
+                Conn c = new Conn();// Insert query is a DML command 
+                // meaning we are updating the query in database
                 String query = "insert into login values('"+smeter+"', '"+susername+"','"+sname+"','"+spassword+"','"+atype+"')";
                 c.s.executeUpdate(query);
                 JOptionPane.showMessageDialog(null, "Account created successfully");
