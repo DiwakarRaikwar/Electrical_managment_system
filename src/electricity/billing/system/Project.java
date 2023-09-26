@@ -4,7 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Project extends JFrame{
+
+public class Project extends JFrame implements ActionListener{
     
     Project(){
        setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -24,13 +25,14 @@ public class Project extends JFrame{
        mb.add(master);
        
        
-       JMenuItem newcustomer = new JMenuItem("new customerr");
+       JMenuItem newcustomer = new JMenuItem("New Customer");
        newcustomer.setFont ( new Font("monospaced", Font.PLAIN,12));
        newcustomer.setBackground ( Color.white);
        ImageIcon icon1 = new ImageIcon(ClassLoader.getSystemResource("icon/icon1.png"));
        Image image1 = icon1.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
        newcustomer.setIcon(new ImageIcon(image1));
        newcustomer.setMnemonic('D');
+       newcustomer.addActionListener (this);
        newcustomer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,ActionEvent.CTRL_MASK));
        master.add(newcustomer);
        
@@ -42,18 +44,20 @@ public class Project extends JFrame{
        Image image2 = icon2.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
        customerdetails.setIcon(new ImageIcon(image2));
        customerdetails.setMnemonic('M');
+        customerdetails.addActionListener (this);
        customerdetails.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M,ActionEvent.CTRL_MASK));
        master.add(customerdetails);
       
        
        
-        JMenuItem depositdetails = new JMenuItem("Deposit Bill");
+        JMenuItem depositdetails = new JMenuItem("Deposit Details");
        depositdetails.setFont ( new Font("monospaced", Font.PLAIN,12));
        depositdetails.setBackground ( Color.white);
        ImageIcon icon3 = new ImageIcon(ClassLoader.getSystemResource("icon/icon3.png"));
        Image image3 = icon3.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
        depositdetails.setIcon(new ImageIcon(image3));
        depositdetails.setMnemonic('N');
+        depositdetails.addActionListener (this);
        depositdetails.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,ActionEvent.CTRL_MASK));
        master.add(depositdetails);
        
@@ -64,6 +68,7 @@ public class Project extends JFrame{
        Image image4 = icon4.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
        calculatebill.setIcon(new ImageIcon(image4));
        calculatebill.setMnemonic('O');
+        calculatebill.addActionListener (this);
        calculatebill.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,ActionEvent.CTRL_MASK));
        master.add(calculatebill);
        
@@ -79,6 +84,7 @@ public class Project extends JFrame{
        Image image5= icon5.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
        updateinformation.setIcon(new ImageIcon(image5));
        updateinformation.setMnemonic('5');
+       
        updateinformation.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,ActionEvent.CTRL_MASK));
        info.add(updateinformation);// Inplace of info we need to add a menu heading like in
        //information option there are multiple options
@@ -180,12 +186,22 @@ public class Project extends JFrame{
        exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W,ActionEvent.CTRL_MASK));
        mexit.add(exit);// Inplace of info we need to add a menu heading like in
        //information option there are multiple options
-       
-        
-     
-       
+
        setLayout(new FlowLayout());
        setVisible(true);
+    }
+    
+    public void actionPerformed (ActionEvent ae){
+        String msg = ae.getActionCommand();
+        if ( msg.equals("New Customer")){
+            new NewCustomer();
+        }else if  ( msg.equals("Customer Details")){
+            
+        }else if ( msg.equals("Deposit Details")){
+            
+        }else if ( msg.equals("Calculate Bill")){
+            new CalculateBill();
+        }
     }
     
     public static void main( String[] args){
