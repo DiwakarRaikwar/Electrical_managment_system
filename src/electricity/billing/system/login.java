@@ -106,8 +106,11 @@ public class login extends JFrame implements ActionListener{
                 
                 ResultSet rs = c.s.executeQuery(query);
                 if ( rs.next()){// if user and password get matcch / then show us the page
+                   String meter = rs.getString("meter_no");
+
                     setVisible(false);
-                    new Project();
+                    
+                    new Project(user, meter);
                 }else{
                     JOptionPane.showMessageDialog(null,"Invalid Login");
                     username.setText("");
