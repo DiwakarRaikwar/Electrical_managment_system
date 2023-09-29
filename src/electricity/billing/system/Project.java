@@ -6,8 +6,12 @@ import java.awt.event.*;
 
 
 public class Project extends JFrame implements ActionListener{
+    String atype, meter;
     
-    Project(){
+    Project(String atype, String meter ){
+        this.atype = atype;
+        this.meter= meter;
+        
        setExtendedState(JFrame.MAXIMIZED_BOTH);
        ImageIcon i1= new ImageIcon (ClassLoader.getSystemResource("icon/elect1.jpg"));
        Image i2 = i1.getImage().getScaledInstance(1550, 850, Image.SCALE_DEFAULT);
@@ -22,7 +26,7 @@ public class Project extends JFrame implements ActionListener{
        
        JMenu master = new JMenu("Master");
        master.setForeground(Color.BLUE);
-       mb.add(master);
+       
        
        
        JMenuItem newcustomer = new JMenuItem("New Customer");
@@ -97,6 +101,7 @@ public class Project extends JFrame implements ActionListener{
        Image image6 = icon6.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
        viewinformation.setIcon(new ImageIcon(image6));
        viewinformation.setMnemonic('1');
+       viewinformation.addActionListener(this);
        viewinformation.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1,ActionEvent.CTRL_MASK));
        info.add(viewinformation);
        
@@ -179,7 +184,7 @@ public class Project extends JFrame implements ActionListener{
        JMenuItem exit = new JMenuItem("Exit");
        exit.setFont ( new Font("monospaced", Font.PLAIN,12));
        exit.setBackground ( Color.white);
-       ImageIcon icon12 = new ImageIcon(ClassLoader.getSystemResource("icon/icon11.png"));
+       ImageIcon icon12 = new  ImageIcon(ClassLoader.getSystemResource("icon/icon11.png"));
        Image image12= icon12.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
        exit.setIcon(new ImageIcon(image12));
        exit.setMnemonic('W');
@@ -187,6 +192,20 @@ public class Project extends JFrame implements ActionListener{
        mexit.add(exit);// Inplace of info we need to add a menu heading like in
        //information option there are multiple options
 
+       if ( atype.equals("Admin")){
+           mb.add(master);
+       }else{
+           mb.add(report);
+       mb.add(user);
+       mb.add(info);
+       }
+        
+       mb.add(mexit);
+       mb.add(utility);
+       
+       
+       
+       
        setLayout(new FlowLayout());
        setVisible(true);
     }
@@ -203,10 +222,12 @@ public class Project extends JFrame implements ActionListener{
             new DepositDetails();
         }else if ( msg.equals("Calculate Bill")){
             new CalculateBill();
+        }else if (msg.equals("View Information")){
+            new ViewInformation(meter);
         }
     }
     
     public static void main( String[] args){
-        new Project();
+        new Project("","");
     }
 }
