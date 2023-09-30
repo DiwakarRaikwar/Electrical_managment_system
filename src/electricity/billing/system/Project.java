@@ -88,7 +88,7 @@ public class Project extends JFrame implements ActionListener{
        Image image5= icon5.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
        updateinformation.setIcon(new ImageIcon(image5));
        updateinformation.setMnemonic('5');
-       
+       updateinformation.addActionListener(this);
        updateinformation.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,ActionEvent.CTRL_MASK));
        info.add(updateinformation);// Inplace of info we need to add a menu heading like in
        //information option there are multiple options
@@ -224,6 +224,8 @@ public class Project extends JFrame implements ActionListener{
             new CalculateBill();
         }else if (msg.equals("View Information")){
             new ViewInformation(meter);
+        }else if ( msg.equals("Update Information")){
+            new UpdateInformation(meter);
         }
     }
     
