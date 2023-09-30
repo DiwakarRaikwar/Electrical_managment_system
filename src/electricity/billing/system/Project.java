@@ -130,6 +130,7 @@ public class Project extends JFrame implements ActionListener{
        Image image8 = icon8.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
        billdetails.setIcon(new ImageIcon(image8));
        billdetails.setMnemonic('D');
+       billdetails.addActionListener(this);
        billdetails.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,ActionEvent.CTRL_MASK));
        user.add(billdetails);
        
@@ -161,6 +162,8 @@ public class Project extends JFrame implements ActionListener{
        Image image10= icon10.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
        notepad.setIcon(new ImageIcon(image7));
        notepad.setMnemonic('G');
+              notepad.addActionListener(this);
+
        notepad.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G,ActionEvent.CTRL_MASK));
        utility.add(notepad);// Inplace of info we need to add a menu heading like in
        //information option there are multiple options
@@ -173,6 +176,7 @@ public class Project extends JFrame implements ActionListener{
        Image image11= icon11.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
        calculator.setIcon(new ImageIcon(image7));
        calculator.setMnemonic('C');
+       calculator.addActionListener(this);
        calculator.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,ActionEvent.CTRL_MASK));
        utility.add(calculator);// Inplace of info we need to add a menu heading like in
        //information option there are multiple options
@@ -188,6 +192,7 @@ public class Project extends JFrame implements ActionListener{
        Image image12= icon12.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
        exit.setIcon(new ImageIcon(image12));
        exit.setMnemonic('W');
+       exit.addActionListener(this);
        exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W,ActionEvent.CTRL_MASK));
        mexit.add(exit);// Inplace of info we need to add a menu heading like in
        //information option there are multiple options
@@ -195,14 +200,15 @@ public class Project extends JFrame implements ActionListener{
        if ( atype.equals("Admin")){
            mb.add(master);
        }else{
-           mb.add(report);
+           
        mb.add(user);
+       mb.add(report);
        mb.add(info);
        }
         
-       mb.add(mexit);
-       mb.add(utility);
        
+       mb.add(utility);
+       mb.add(mexit);
        
        
        
@@ -226,6 +232,24 @@ public class Project extends JFrame implements ActionListener{
             new ViewInformation(meter);
         }else if ( msg.equals("Update Information")){
             new UpdateInformation(meter);
+        }else  if ( msg.equals("Bill details")){
+            new BillDetails(meter);   
+        }else if ( msg.equals ("Notepad")){
+                try{
+                    Runtime.getRuntime().exec("notepad.exe");
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+        }else if( msg.equals("Exit")){
+            setVisible (false);
+            new login();
+        }else if ( msg.equals("Calculator")){
+            
+             try{
+                    Runtime.getRuntime().exec("calc.exe");
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
         }
     }
     
