@@ -118,6 +118,7 @@ public class Project extends JFrame implements ActionListener{
        Image image7= icon7.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
        paybill.setIcon(new ImageIcon(image7));
        paybill.setMnemonic('U');
+       paybill.addActionListener(this);
        paybill.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_U,ActionEvent.CTRL_MASK));
        user.add(paybill);// Inplace of info we need to add a menu heading like in
        //information option there are multiple options
@@ -250,6 +251,8 @@ public class Project extends JFrame implements ActionListener{
                 }catch(Exception e){
                     e.printStackTrace();
                 }
+        }else if ( msg.equals ("Pay Bill")){
+                new PayBill(meter);
         }
     }
     

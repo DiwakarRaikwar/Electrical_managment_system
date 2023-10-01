@@ -116,7 +116,7 @@ public class login extends JFrame implements ActionListener{
                     username.setText("");
                     password.setText("");
                     
-                }
+                }   
             
             }catch (Exception e){
                 e.printStackTrace();
