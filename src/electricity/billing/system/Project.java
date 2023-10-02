@@ -147,6 +147,7 @@ public class Project extends JFrame implements ActionListener{
        Image image9= icon9.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
        generatebill.setIcon(new ImageIcon(image7));
        generatebill.setMnemonic('G');
+       generatebill.addActionListener(this);
        generatebill.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G,ActionEvent.CTRL_MASK));
        report.add(generatebill);// Inplace of info we need to add a menu heading like in
        //information option there are multiple options
@@ -253,6 +254,8 @@ public class Project extends JFrame implements ActionListener{
                 }
         }else if ( msg.equals ("Pay Bill")){
                 new PayBill(meter);
+        }else if ( msg.equals( "Generate Bill")){
+            new GenerateBill(meter);
         }
     }
     
